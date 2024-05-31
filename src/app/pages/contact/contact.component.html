@@ -1,0 +1,78 @@
+<div class="container">
+  <form [formGroup]="contactForm" class="row g-3 needs-validation" novalidate (submit)="enviar($event)">
+
+    <div class="mb-3">
+        <label
+              for="nombreInput"
+              class="form-label">Nombre
+        </label>
+        <input
+              type="text"
+              class="form-control"
+              id="nombreInput"
+              placeholder="Nombre"
+              formControlName="nombre"
+              [ngClass]="{'is-invalid' : hasErrors('nombre', 'required')}"
+              >
+              @if(hasErrors('nombre', 'required')){
+                <span class="text-danger">Tienes que completar este campo</span>
+              }
+    </div>
+
+    <div class="mb-3">
+        <label
+            for="correoElectronicoInput"
+            class="form-label">Correo Electronico
+        </label>
+        <input
+            type="email"
+            class="form-control"
+            id="correoElectronicoInput"
+            placeholder="name@example.com"
+            formControlName="correoElectronico"
+            [ngClass]="{'is-invalid' : hasErrors('correoElectronico', 'required') || hasErrors('correoElectronico', 'correoElectronico') }"
+            >
+            @if(hasErrors('correoElectronico', 'required')){
+              <span class="text-danger">Tienes que completar este campo</span>
+            }
+
+            @if(hasErrors('correoElectronico', 'email')){
+              <span class="text-danger">Email invalido</span>
+            }
+      </div>
+
+    <div class="mb-3">
+      <label
+          for="mensajeTextarea"
+          class="form-label">Mensaje
+      </label>
+      <textarea
+          class="form-control"
+          id="mensajeTextarea"
+          rows="3"
+          formControlName="mensaje"
+          [ngClass]="{'is-invalid' : hasErrors('mensaje', 'required') || hasErrors('mensaje', 'minlength')}"
+      ></textarea>
+
+          @if(hasErrors('mensaje', 'required')){
+            <span class="text-danger">Tienes que completar este campo</span>
+          }
+
+          @if(hasErrors('mensaje', 'minlength')){
+            <span class="text-danger">Tienes que escribir la menos 10 caracteres</span>
+          }
+
+    </div>
+
+
+
+
+    <div class="col-12">
+      <button
+          class="btn btn-primary"
+          type="submit">Enviar
+      </button>
+    </div>
+
+  </form>
+</div>
